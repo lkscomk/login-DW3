@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
+    <title>Bem-vindo ao Sistema</title>
+</head>
+<body>
+    {% block content %}
+    <h1>Bem-vindo ao Sistema</h1>
+    <div class="card-body">
+        <p>Obrigado por acessar nosso sistema. Você agora tem acesso a todas as funcionalidades disponíveis.</p>
+        <p>Se precisar de ajuda ou suporte, entre em contato conosco.</p>
+    </div>
+    {% endblock %}
+</body>
+</html>

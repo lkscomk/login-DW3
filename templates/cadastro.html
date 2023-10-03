@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cliente</title>
+    <!-- Inclua o link para a biblioteca do Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Cadastro de Cliente
+                    </div>
+                    <div class="card-body">
+                        <form id="cadastroForm">
+                            <div class="form-group">
+                                <label for="nomeCompleto">Nome Completo</label>
+                                <input type="text" class="form-control" id="nomeCompleto" name="nomeCompleto" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cpf">CPF</label>
+                                <input type="text" class="form-control" id="cpf" name="cpf" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefone">Telefone</label>
+                                <input type="tel" class="form-control" id="telefone" name="telefone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="endereco">Endereço</label>
+                                <input type="text" class="form-control" id="endereco" name="endereco" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="senha">Senha</label>
+                                <input type="password" class="form-control" id="senha" name="senha" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmarSenha">Confirmar Senha</label>
+                                <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" required>
+                            </div>
+                            <div id="senhaErro" class="text-danger"></div>
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            <a class="btn btn-outline-primary"  href="{{ url_for('login') }}">Fazer Login</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inclua os scripts do Bootstrap e do jQuery, se necessário -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById("cadastroForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Impede o envio do formulário
+
+            // Recupere os valores dos campos
+            var nomeCompleto = document.getElementById("nomeCompleto").value;
+            var cpf = document.getElementById("cpf").value;
+            var email = document.getElementById("email").value;
+            var telefone = document.getElementById("telefone").value;
+            var endereco = document.getElementById("endereco").value;
+            var senha = document.getElementById("senha").value;
+            var confirmarSenha = document.getElementById("confirmarSenha").value;
+
+            // Verifique se a senha e a confirmação de senha são iguais
+            if (senha !== confirmarSenha) {
+                alert("As senhas não coincidem");
+            }
+
+            // Faça o envio dos dados para o servidor ou realize outras ações conforme necessário
+            console.log("Dados do cliente cadastrados com sucesso!");
+        });
+    </script>
+</body>
+</html>

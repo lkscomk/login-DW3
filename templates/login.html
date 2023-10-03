@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Tela de Login
+                    </div>
+                    <div class="card-body">
+                        {% if erros %}
+                        {% for erro in erros %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ erro }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        <form method="POST" action="/login">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required value="{{ email }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="senha" name="senha" required>
+                            </div>
+                            <button type="submit" class="btn btn-success" value="Login">Entrar</button>
+                            <a class="btn btn-primary"  href="{{ url_for('cadastro') }}">Cadastrar</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
