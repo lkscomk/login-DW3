@@ -13,17 +13,12 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Instituto_Federal_de_Rond%C3%B4nia_-_Marca_Vertical_2015.svg/1200px-Instituto_Federal_de_Rond%C3%B4nia_-_Marca_Vertical_2015.svg.png" alt="Imagem 2">
+                    
                     <div class="card-header">
                         Tela de Login
                     </div>
                     <div class="card-body">
-                        {% if erros %}
-                        {% for erro in erros %}
-                        <div class="alert alert-danger" role="alert">
-                            {{ erro }}
-                        </div>
-                        {% endfor %}
-                        {% endif %}
                         <form method="POST" action="/login">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
