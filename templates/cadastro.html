@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-Br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <!-- Inclua o link para a biblioteca do Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+
 <body>
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -15,27 +17,35 @@
                     <div class="card-header">
                         Cadastro de Cliente
                     </div>
+                    <!-- Exibir mensagens de erro, se houver -->
+                    {% if erros %}
+                    {% for erro in erros %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ erro }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
                     <div class="card-body">
-                        <form id="cadastroForm">
+                        <form id="cadastroForm" method="POST" action="/cadastro">
                             <div class="form-group">
                                 <label for="nomeCompleto">Nome Completo</label>
-                                <input type="text" class="form-control" id="nomeCompleto" name="nomeCompleto" required>
+                                <input type="text" class="form-control" id="nomeCompleto" name="nomeCompleto" value="{{ nomeCompleto }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="cpf">CPF</label>
-                                <input type="text" class="form-control" id="cpf" name="cpf" required>
+                                <input type="text" class="form-control" id="cpf" name="cpf" value="{{ cpf }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">E-mail</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ email }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="telefone">Telefone</label>
-                                <input type="tel" class="form-control" id="telefone" name="telefone" required>
+                                <input type="tel" class="form-control" id="telefone" name="telefone" value="{{ telefone }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="endereco">Endereço</label>
-                                <input type="text" class="form-control" id="endereco" name="endereco" required>
+                                <input type="text" class="form-control" id="endereco" value="{{ endereco }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="senha">Senha</label>
@@ -43,11 +53,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="confirmarSenha">Confirmar Senha</label>
-                                <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" required>
+                                <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha"
+                                    required>
                             </div>
                             <div id="senhaErro" class="text-danger"></div>
-                            <button type="submit" class="btn btn-primary">Cadastrar</button>
-                            <a class="btn btn-outline-primary"  href="{{ url_for('login') }}">Fazer Login</a>
+                        
+                            <button type="submit" class="btn btn-success">Cadastro</button>
+                            <a class="btn btn-outline-primary" href="{{ url_for('login') }}">Fazer Login</a>
                         </form>
                     </div>
                 </div>
@@ -61,26 +73,28 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        document.getElementById("cadastroForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Impede o envio do formulário
+        document.getElementById("cadastroForm").addEventListener("submit", function (event) {
+            // Impede o envio do formulário
+            event.preventDefault();
 
             // Recupere os valores dos campos
-            var nomeCompleto = document.getElementById("nomeCompleto").value;
-            var cpf = document.getElementById("cpf").value;
-            var email = document.getElementById("email").value;
-            var telefone = document.getElementById("telefone").value;
-            var endereco = document.getElementById("endereco").value;
             var senha = document.getElementById("senha").value;
             var confirmarSenha = document.getElementById("confirmarSenha").value;
 
             // Verifique se a senha e a confirmação de senha são iguais
             if (senha !== confirmarSenha) {
-                alert("As senhas não coincidem");
+                // Exiba uma mensagem de erro
+                var senhaErro = document.getElementById("senhaErro");
+                senhaErro.textContent = "As senhas não coincidem";
+                senhaErro.style.display = "block";
+            } else {
+                // Limpe a mensagem de erro e envie o formulário
+                var senhaErro = document.getElementById("senhaErro");
+                senhaErro.style.display = "none";
+                document.getElementById("cadastroForm").submit();
             }
-
-            // Faça o envio dos dados para o servidor ou realize outras ações conforme necessário
-            console.log("Dados do cliente cadastrados com sucesso!");
         });
     </script>
 </body>
+
 </html>

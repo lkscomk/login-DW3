@@ -1,18 +1,31 @@
 from flask import Flask, render_template, request, redirect, url_for
-from flask_cors import CORS
 from helpers.validacoes import validar_senha
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*", "supports_credentials": True}})
-
 
 @app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html')
 
-@app.route('/cadastro')
+@app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
-    return render_template('cadastro.html')
+  if request.method == 'GET':
+      return render_template('cadastro.html')
+  
+  nomeCompleto = request.form['nomeCompleto']
+  cpf = request.form['cpf']
+  telefone = request.form['telefone']
+  endereco = request.form['endereco']
+
+  senha = request.form['senha']
+  resultado = validar_senha(senha)
+
+  if resultado is True:
+      return redirect('/')
+
+  else:
+      return render_template('cadastro.html', erros=resultado, nomeCompleto=nomeCompleto, cof=cpf, telefone=telefone, endereco=endereco)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -20,15 +33,7 @@ def login():
       return render_template('login.html')
 
     if request.method == 'POST':
-      email = request.form['email']
-      senha = request.form['senha']
 
-      resultado = validar_senha(senha)
-
-      if resultado is True:
-        return redirect('/')
-
-      else:
-        return render_template('login.html', erros=resultado, email=email)
+      return redirect('/')
 
 app.run(host='0.0.0.0', port=8000)
